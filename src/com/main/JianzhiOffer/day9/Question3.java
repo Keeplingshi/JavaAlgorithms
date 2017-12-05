@@ -2,6 +2,7 @@ package com.main.JianzhiOffer.day9;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。
@@ -15,7 +16,7 @@ public class Question3 {
 
 	public static void main(String[] args) {
 
-		String str="bcaa";
+		String str="abc";
 		Question3 question3=new Question3();
 		question3.Permutation(str);
 	}
@@ -23,15 +24,42 @@ public class Question3 {
     public ArrayList<String> Permutation(String str) 
     {
     	ArrayList<String> strList=new ArrayList<>(0);
-    	
-        char[] cstr=str.toCharArray();
-        Arrays.sort(cstr);
-        for(char c:cstr)
-        {
-        	System.out.println(c);
-        }
-        
-        return null;
+    	if(str!=null&&str.length()>0)
+    	{
+    		Permutation(str.toCharArray(),0,strList);
+    		Collections.sort(strList);
+    	}
+
+        return strList;
     }
 	
+    /**
+     * 回溯法
+     * @param cstr
+     * @param index
+     * @param list
+     */
+    public void Permutation(char[] cstr,int index,ArrayList<String> list)
+    {
+    	if(index == cstr.length - 1){
+    		String val=String.valueOf(cstr);
+    		if(!list.contains(val)){
+    			list.add(val);
+    		}
+    	}else{
+    		for(int j=index;j<cstr.length;j++)
+    		{
+    			swap(cstr,index,j);
+    			Permutation(cstr,index+1,list);
+    			swap(cstr,index,j);
+    		}
+    	}
+    }
+
+    public static void swap(char[] cs, int i, int j) {
+        char temp = cs[i];
+        cs[i] = cs[j];
+        cs[j] = temp;
+    }
+    
 }
