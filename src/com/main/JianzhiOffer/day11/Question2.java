@@ -23,8 +23,8 @@ public class Question2 {
 
 	public static void main(String[] args) {
 
-		Question2 question2=new Question2();
-		System.out.println(7%1000000007);
+//		Question2 question2=new Question2();
+//		System.out.println(7%1000000007);
 		
 	}
 	
