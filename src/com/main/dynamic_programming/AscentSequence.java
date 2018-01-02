@@ -8,6 +8,7 @@ package com.main.dynamic_programming;
 	测试样例：
 	[2,1,4,3,1,5,6],7
 	返回：4
+	
  * @author chenbin
  *
  */
