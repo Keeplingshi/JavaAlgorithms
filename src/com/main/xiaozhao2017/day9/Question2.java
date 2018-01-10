@@ -39,9 +39,9 @@ public class Question2 {
 			
 			if(a>=0&&b>=0&&c>=0){
 				System.out.println(a+" "+b+" "+c);
+			}else{
+				System.out.println("No");
 			}
-			
-			
 		}
 		
 
