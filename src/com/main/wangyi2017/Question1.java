@@ -26,21 +26,28 @@ import java.util.Scanner;
  */
 public class Question1 
 {
-
 	public static void main(String[] args)
 	{
 		Scanner sc=new Scanner(System.in);
 		int n=sc.nextInt();
 		int length[]=new int[n];
+		int sum=0;
 		for(int i=0;i<n;i++)
 		{
 			length[i]=sc.nextInt()/1024;
+			sum+=length[i];
 		}
 		
+		int dp[]=new int[210000]; 
 		for(int i=0;i<n;i++)
 		{
-			System.out.println(length[i]);
+			for(int j=sum/2;j>=length[i];--j)
+			{
+				dp[j]=Math.max(dp[j], dp[j-length[i]]+length[i]);
+			}
 		}
+		
+		System.out.println((sum-dp[sum/2])*1024);
 		
 	}
 	
