@@ -36,10 +36,8 @@ public class Question1 {
 				if (j < w[i])
 					m[i][j] = m[i - 1][j]; // 不装入背包
 				else {
-					if (m[i - 1][j - w[i]] + v[i] > m[i - 1][j])
-						m[i][j] = m[i - 1][j - w[i]] + v[i]; // 选择价值较大者
-					else
-						m[i][j] = m[i - 1][j];
+					//是否要装第i个物品,不装第i个物品的总价值f[i-1][j]，装第i个物品的总价值f[i-1][j-w[i]]+v[i]
+					m[i][j]=Math.max(m[i-1][j], m[i-1][j-w[i]]+v[i]);
 				}
 			}
 		}
@@ -56,6 +54,68 @@ public class Question1 {
 			if (x[i] == 1)
 				System.out.printf("%2d", (i + 1));
 		}
+	}
+	
+	private static void beibao()
+	{
+		int c=10;				//背包容量
+		int n=5;				//物品个数
+		
+//		int[] w={2,2,6,5,4};	//重量
+//		int[] v={6,3,5,4,6};	//价值
+		
+		int[] w={5,2,6,2,4};	//重量
+		int[] v={4,3,5,6,6};	//价值
+//		
+		int f[][]=new int[n][c+1];
+		int[] x = new int[n]; // 记录物品装入情况，0表示不转入，1表示装入
+//		x[0] = 1; // 初始值表示第一个物品已装入背包
+		
+		for(int j=1;j<=c;j++)
+		{
+			if(j>=w[0]){
+				f[0][j]=v[0];
+			}
+		}
+		
+		for(int i=1;i<n;i++)
+		{
+			for(int j=1;j<=c;j++)
+			{
+				if(j<w[i])
+				{
+					f[i][j]=f[i-1][j];
+				}else{
+					//是否要装第i个物品,不装第i个物品的总价值f[i-1][j]，装第i个物品的总价值f[i-1][j-w[i]]+v[i]
+					f[i][j]=Math.max(f[i-1][j], f[i-1][j-w[i]]+v[i]);
+				}
+			}
+		}
+		
+		System.out.println(f[4][10]);
+		
+		//求出装入的物品序列
+		for(int i=4;i>=1;i--)
+		{
+			if(f[i][c]>f[i-1][c])
+			{
+				x[i]=1;
+				c-=w[i];
+			}else{
+				x[i]=0;
+			}
+		}
+		
+		//上面for循环并没有考虑第一个是否放入
+		if(w[0]<=c){
+			x[0]=1;
+		}
+		
+		for (int i = 0; i < 5; i++) {
+			if (x[i] == 1)
+				System.out.print((i + 1)+" ");
+		}
+		System.out.println();
 	}
 
 }
