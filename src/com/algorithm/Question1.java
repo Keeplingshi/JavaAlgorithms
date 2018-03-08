@@ -14,6 +14,11 @@ package com.algorithm;
  */
 public class Question1 {
 	public static void main(String[] args) {
+
+	}
+	
+	public static void test1()
+	{
 		int[] w = { 2, 2, 6, 5, 4 }; // 物品重量
 		int[] v = { 6, 3, 5, 4, 6 }; // 物品价值
 		int c = 10; // 背包容量
