@@ -14,7 +14,27 @@ package com.algorithm;
  */
 public class Question1 {
 	public static void main(String[] args) {
-
+		test2();
+	}
+	
+	public static void test2()
+	{
+		int[] w = { 2, 2, 6, 5, 4 }; // 物品重量
+		int[] v = { 6, 3, 5, 4, 6 }; // 物品价值
+		int n=w.length;
+		int c = 10; // 背包容量
+		
+		int dp[]=new int[c+1];
+		
+		for(int i=0;i<n;i++)
+		{
+			for(int j=c;j>=w[i];j--)
+			{
+				dp[j]=Math.max(dp[j],dp[j-w[i]]+v[i]);
+			}
+		}
+		
+		System.out.println(dp[c]);
 	}
 	
 	public static void test1()
