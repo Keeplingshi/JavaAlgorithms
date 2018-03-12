@@ -39,29 +39,34 @@ public class Question1 {
 		}
 		
 		System.out.println(solve(item,n));
+		
+	}
+
+	private static int solve(int[] item, int n) 
+	{
+		
+		int left=0;
+		int right=n-1;
+		int count=0;
+		while(right>left)
+		{
+			if(item[left]>item[right])
+			{
+				item[right-1]+=item[right];
+				right--;
+				count++;
+			}else if(item[left]<item[right]){
+				item[left+1]+=item[left];
+				left++;
+				count++;
+			}else{
+				left++;
+				right--;
+			}
+		}
+		
+		return count;
 	}
 	
-    private static int solve(int[] arr, int n) {
-        int left = 0;
-        int right = n - 1;
-        int res = 0;
-        while(left<right)
-        {
-        	if(arr[left]<arr[right])
-        	{
-        		arr[left+1]+=arr[left];
-        		left++;
-        		res++;
-        	}else if(arr[left]>arr[right]){
-        		arr[right-1]+=arr[right];
-        		right--;
-        		res++;
-        	}else{
-        		left++;
-        		right--;
-        	}
-        }
-        return res;
-    }
 	
 }
