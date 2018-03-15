@@ -5,13 +5,22 @@ package com.algorithm;
  * @author Administrator
  *
  */
-public class Question2 {
+public class Sort {
 
 	public static void main(String[] args)
 	{
 		int array[]={6,4,5,3,2,1};
 		
-		test3(array);
+		Sort.bubbleSort(array);
+	}
+	
+	/**
+	 * 希尔排序
+	 * @param array
+	 */
+	private static void shellSort(int[] array)
+	{
+		
 	}
 	
 	/**
@@ -21,7 +30,7 @@ public class Question2 {
 	 * 算法时间复杂度O(n2)
 	 * @param array
 	 */
-	private static void test3(int[] array) 
+	private static void insertionSort(int[] array) 
 	{
 		for(int i=1;i<array.length;i++)
 		{
@@ -44,7 +53,7 @@ public class Question2 {
 		让较大的数往下沉，较小的往上冒。即：每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换。
 		冒泡排序是稳定的。算法时间复杂度O(n2)
 	 */
-	public static void test1(int[] array)
+	public static void bubbleSort(int[] array)
 	{
 		for(int i=array.length-1;i>0;i--)
 		{
@@ -68,7 +77,7 @@ public class Question2 {
 	 * 算法复杂的O(n2)
 	 * @param array
 	 */
-	public static void test2(int[] array)
+	public static void selectionSort(int[] array)
 	{
 		
 		for(int i=0;i<array.length-1;i++)
