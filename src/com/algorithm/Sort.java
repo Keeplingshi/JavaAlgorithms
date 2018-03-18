@@ -14,44 +14,93 @@ public class Sort {
 //		Sort.bubbleSort(array);
 //		Sort.selectionSort(array);
 //		Sort.insertionSort(array);
-		Sort.mergeSort(array);
+//		Sort.mergeSort(array);
+		Sort.quickSort(array);
 	}
 	
 	/**
 	 * 快速排序
 	 * @param array
 	 */
-	private static void quickSort(int[] array)
+	private static void quickSort(int[] array) 
 	{
-		
-		
+		quickSort(array,0,array.length-1);
 		printArr(array);
 	}
-	
+
+	/**
+	 * 
+	 * @param array
+	 * @param left
+	 * @param right
+	 */
+	private static void quickSort(int[] array, int left, int right) 
+	{
+		if(left>right){
+			return;
+		}
+		
+		int base=array[left];
+		int i=left;
+		int j=right;
+		
+		while(i!=j)
+		{
+			//找到第一个比基准小的值
+			while(array[j]>=base&&i<j){
+				j--;
+			}
+			//从左至右，找到第一个比基准大的值
+			while(array[i]<=base&&i<j)
+			{
+				i++;
+			}
+			
+			//交换这两个值得位置
+			if(i<j){
+				int temp=array[i];
+				array[i]=array[j];
+				array[j]=temp;
+			}
+		}
+		
+		//将base放到左右中间，此时i==j
+		array[left]=array[i];
+		array[i]=base;
+		
+		quickSort(array,left,i-1);
+		quickSort(array,i+1,right);
+	}
+
 	/**
 	 * 归并排序
 	 * @param array
 	 */
-	private static void mergeSort(int[] array)
+	private static void mergeSort(int[] array) 
 	{
 		mergeSort(array,0,array.length-1);
 		printArr(array);
 	}
-	
-	private static void mergeSort(int[] array,int start,int end)
+
+	/**
+	 * 归并排序递归过程
+	 * @param array
+	 * @param i
+	 * @param j
+	 */
+	private static void mergeSort(int[] array, int start, int end) 
 	{
 		int mid=(start+end)/2;
 		if(start<end)
 		{
-			mergeSort(array, start, mid);
+			mergeSort(array, start, mid); 
 			mergeSort(array,mid+1,end);
 			mergeSort(array,start,mid,end);
 		}
-		
 	}
-	
+
 	/**
-	 * 归并排序辅助函数
+	 * 归并排序，对数组array的start到end进行排序
 	 * @param array
 	 * @param start
 	 * @param mid
@@ -59,31 +108,35 @@ public class Sort {
 	 */
 	private static void mergeSort(int[] array, int start, int mid, int end) 
 	{
-        int[] temp = new int[end - start + 1];
-        int i = start;// 左指针
-        int j = mid + 1;// 右指针
-        int k = 0;
-        // 把较小的数先移到新数组中
-        while (i <= mid && j <= end) {
-            if (array[i] < array[j]) {
-                temp[k++] =array[i++];
-            } else {
-                temp[k++] = array[j++];
-            }
-        }
-        // 把左边剩余的数移入数组
-        while (i <= mid) {
-            temp[k++] = array[i++];
-        }
-        // 把右边边剩余的数移入数组
-        while (j <= end) {
-            temp[k++] = array[j++];
-        }
-        // 把新数组中的数覆盖nums数组
-        for (int k2 = 0; k2 < temp.length; k2++) {
-        	array[k2 + start] = temp[k2];
-        }
+		int tmp[]=new int[end-start+1];
+		int left=start;		//数组array，从start到mid的左指针
+		int right=mid+1;	//数组array，从mid+1到end的右指针
+		int t=0;			//数组tmp的指针
+		
+		while(left<=mid&&right<=end)
+		{
+			if(array[left]<array[right]){
+				tmp[t++]=array[left++];
+			}else{
+				tmp[t++]=array[right++];
+			}
+		}
+		
+		//将array数组中剩余的部分放入tmp中
+		while(left<=mid){
+			tmp[t++]=array[left++];
+		}
+		while(right<=end){
+			tmp[t++]=array[right++];
+		}
+		
+		//将排序好的tmp数组放回到array中，array的下标为start到end
+		for(int i=0;i<tmp.length;i++)
+		{
+			array[i+start]=tmp[i];
+		}
 	}
+
 
 	/**
 	 * 希尔排序
