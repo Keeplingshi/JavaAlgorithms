@@ -23,6 +23,46 @@ public class Question2 {
 
 	public static void main(String[] args) 
 	{
+		test2();
+	}
+	
+	/**
+	 * 解法2，采用二维数组
+	 */
+	private static void test2() {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		
+		int coins[]={1,5,10,20,50,100};
+		int h=coins.length;
+		long dp[][]=new long[h][n+1];
+		
+		for(int i=0;i<h;i++){
+			dp[i][0]=1;
+		}
+		for(int i=0;i<=n;i++){
+			dp[0][i]=1;
+		}
+		
+		for(int i=1;i<h;i++)
+		{
+			for(int j=1;j<=n;j++)
+			{
+				if(coins[i]>j){
+					dp[i][j]=dp[i-1][j];
+				}else{
+					dp[i][j]=dp[i][j-coins[i]]+dp[i-1][j];
+				}
+			}
+		}
+		System.out.println(dp[h-1][n]);
+	}
+
+	/**
+	 * 解法1，一维数组
+	 */
+	private static void test1()
+	{
 		Scanner sc=new Scanner(System.in);
 		int n=sc.nextInt();
 		
@@ -42,4 +82,5 @@ public class Question2 {
 		}
 		System.out.println(dp[n]);
 	}
+	
 }
