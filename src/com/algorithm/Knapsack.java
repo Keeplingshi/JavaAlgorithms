@@ -8,21 +8,61 @@ package com.algorithm;
  * 求放置哪些物品进背包，可使这些物品的重量总和不超过背包容量，且价值总和最大。
  * 
  * 假设有5件物品，其重量分别是w={2，2，6，5，4}，价值分别是v={6，3，5，4，6}，背包容量为10。
+ * 结果：15
+ * 
+ * 
+ * 完全背包
+ * 设有n种物品，每种物品有一个重量及一个价值。但每种物品的数量是无限的，同时有一个背包，最大载重量为M，
+ * 今从n种物品中选取若干件(同一种物品可以多次选取)，使其重量的和小于等于M，而价值的和为最大。
+ * 
+ * 假设4件物品，其重量分别是w={2，3，4，7}，价值分别是v={1,3,5,9}，背包容量为10。
+ * 结果：12
  * 
  * @author Administrator
  *
  */
-public class Question1 {
+public class Knapsack {
+	
 	public static void main(String[] args) {
-		test2();
+		zero_one_Knapsack();
+		all_Knapsack();
 	}
 	
-	public static void test2()
+	/**
+	 * 完全背包问题
+	 * 设有n种物品，每种物品有一个重量及一个价值。但每种物品的数量是无限的，同时有一个背包，最大载重量为M，今从n种物品中选取若干件(同一种物品可以多次选取)，使其重量的和小于等于M，而价值的和为最大。
+	 * 
+	 */
+	public static void all_Knapsack()
+	{
+		int[] w = { 2,3,4,7 }; 	// 物品重量
+		int[] v = { 1,3,5,9 }; 	// 物品价值
+		int c=10;				//背包容量
+		int n=w.length;
+		
+		int dp[]=new int[c+1];
+		
+		for(int i=0;i<n;i++)
+		{
+			for(int j=w[i];j<=c;j++)
+			{
+				dp[j]=Math.max(dp[j], dp[j-w[i]]+v[i]);
+			}
+		}
+		System.out.println(dp[c]);
+		
+	}
+	
+	/**
+	 * 0-1背包，一维数组解法
+	 */
+	public static void zero_one_Knapsack()
 	{
 		int[] w = { 2, 2, 6, 5, 4 }; // 物品重量
 		int[] v = { 6, 3, 5, 4, 6 }; // 物品价值
-		int n=w.length;
 		int c = 10; // 背包容量
+		int n=w.length;
+		
 		
 		int dp[]=new int[c+1];
 		
@@ -32,12 +72,13 @@ public class Question1 {
 			{
 				dp[j]=Math.max(dp[j],dp[j-w[i]]+v[i]);
 			}
+			printArr(dp);
 		}
 		
 		System.out.println(dp[c]);
 	}
 	
-	public static void test1()
+	public static void zero_one_Knapsack2()
 	{
 		int[] w = { 2, 2, 6, 5, 4 }; // 物品重量
 		int[] v = { 6, 3, 5, 4, 6 }; // 物品价值
@@ -143,4 +184,16 @@ public class Question1 {
 		System.out.println();
 	}
 
+	/**
+	 * 打印数组
+	 * @param array
+	 */
+	public static void printArr(int[] array)
+	{
+		for (int i : array) {
+			System.out.print(i+" ");
+		}
+		System.out.println();
+	}
+	
 }

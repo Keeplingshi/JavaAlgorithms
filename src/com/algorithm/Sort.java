@@ -14,72 +14,21 @@ public class Sort {
 //		Sort.bubbleSort(array);
 //		Sort.selectionSort(array);
 //		Sort.insertionSort(array);
-//		Sort.mergeSort(array);
-		Sort.quickSort(array);
+		Sort.mergeSort(array);
+//		Sort.quickSort(array);
 //		Sort.countSort(array);
 	}
 	
 	/**
-	 * 快速排序  O(nlogn)
-	 * @param array
-	 */
-	private static void quickSort(int[] array) 
-	{
-		quickSort(array,0,array.length-1);
-		printArr(array);
-	}
-
-	/**
-	 * 快速排序，哨兵相遇
-	 * @param array
-	 * @param i
-	 * @param j
-	 */
-	private static void quickSort(int[] array, int left, int right) 
-	{
-		if(left>right){
-			return;
-		}
-		int base=array[left];		//基准，将array数组分为两个部分，其左边部分都小于base，右边部分大于base
-		int i=left;
-		int j=right;
-		
-		while(i!=j)
-		{
-			//右侧哨兵先开始走，右侧都应该大于base，因此遇到等于base的值依然继续向左侧移动
-			while(array[j]>=base&&j>i){
-				j--;
-			}
-			//左侧哨兵开始走，同上
-			while(array[i]<=base&&j>i){
-				i++;
-			}
-			//交换array[i]与array[j]的位置
-			if(i<j){
-				int t=array[i];
-				array[i]=array[j];
-				array[j]=t;
-			}
-		}
-		//此时，i==j，array[i]与base交换
-		array[left]=array[i];
-		array[i]=base;
-		
-		//base的位置已固定
-		quickSort(array,left,i-1);
-		quickSort(array,i+1,right);
-		
-	}
-
-	/**
 	 * 归并排序
 	 * @param array
 	 */
-	private static void mergeSort(int[] array) {
+	private static void mergeSort(int[] array) 
+	{
 		mergeSort(array,0,array.length-1);
 		printArr(array);
 	}
-	
+
 	/**
 	 * 归并排序，递归过程
 	 * @param array
@@ -88,6 +37,7 @@ public class Sort {
 	 */
 	private static void mergeSort(int[] array, int start, int end) 
 	{
+		
 		int mid=(start+end)/2;
 		if(start<end){
 			mergeSort(array,start,mid);
@@ -97,8 +47,8 @@ public class Sort {
 	}
 
 	/**
-	 * 归并排序，排序过程
-	 * array数组中，start到mid是有序的，mid+1到end是有序的，最终返回的array数组中，要使start到end是有序的
+	 * 归并排序，将start到end之间的数组排序
+	 * 此时传入的array数组，start到mid是有序的，mid+1到end是有序的
 	 * @param array
 	 * @param start
 	 * @param mid
@@ -107,32 +57,87 @@ public class Sort {
 	private static void mergeSort(int[] array, int start, int mid, int end) 
 	{
 		int temp[]=new int[end-start+1];
-		int left=start;	//左指针
-		int right=mid+1;	//右指针
-		int k=0;		//k是temp的指针
+		int i=start;	//左指针
+		int j=mid+1;	//右指针
+		int k=0;		//temp数组指针
 		
-		while(left<=mid&&right<=end)
-		{
-			if(array[left]<=array[right]){
-				temp[k++]=array[left++];
+		//将start到mid与mid+1到end之间的元素排序放入temp数组中
+		while(i<=mid&&j<=end){
+			if(array[i]<array[j]){
+				temp[k++]=array[i++];
 			}else{
-				temp[k++]=array[right++];
+				temp[k++]=array[j++];
 			}
 		}
 		
-		//将start到end中array数组剩余部分放入到temp数组
-		while(left<=mid){
-			temp[k++]=array[left++];
+		while(i<=mid){
+			temp[k++]=array[i++];
 		}
 		
-		while(right<=end){
-			temp[k++]=array[right++];
+		while(j<=end){
+			temp[k++]=array[j++];
 		}
 		
-		//将temp数组放回到array数组中。（此时temp数组是array数组中start到end排好序的部分）
-		for(int i=0;i<temp.length;i++){
-			array[start+i]=temp[i];
+		//此时得到的temp数组是有序的，且是array数组中start到end之间的所有元素
+		//将temp数组放回到array数组中
+		for(int t=0;t<temp.length;t++){
+			array[t+start]=temp[t];
 		}
+		
+	}
+
+	/**
+	 * 快速排序
+	 * @param array
+	 */
+	private static void quickSort(int[] array) {
+		quickSort(array,0,array.length-1);
+		printArr(array);
+	}
+
+	/**
+	 * 快速排序。排i到j
+	 * @param array
+	 * @param left
+	 * @param right
+	 */
+	private static void quickSort(int[] array, int start, int end) 
+	{
+		if(start>end){
+			return;
+		}
+		
+		int base=array[start];
+		int left=start;
+		int right=end;
+		
+		//哨兵相遇
+		while(right!=left){
+			
+			//右侧哨兵先走，找到第一个比base小的数
+			while(right>left&&array[right]>=base){
+				right--;
+			}
+			//左侧，找到第一个比base大的数
+			while(right>left&&array[left]<=base){
+				left++;
+			}
+			
+			//将两个数交换
+			if(left<right){
+				int temp=array[left];
+				array[left]=array[right];
+				array[right]=temp;
+			}
+		}
+		
+		//此时left==right，交换base与array[left]
+		array[start]=array[left];
+		array[left]=base;
+		
+		quickSort(array,start,left-1);
+		quickSort(array,left+1,end);
+		
 	}
 
 	/**
