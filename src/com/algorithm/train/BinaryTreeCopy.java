@@ -1,4 +1,4 @@
-package com.algorithm;
+package com.algorithm.train;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,13 +14,13 @@ import java.util.Stack;
  * @author Administrator
  *
  */
-public class BinaryTree {
+public class BinaryTreeCopy {
 
 	
 	public static void main(String[] args)
 	{
-		TreeNode node=new BinaryTree().init();
-		printTreeByLayer(node);
+		TreeNode node=new BinaryTreeCopy().init();
+//		printTreeByLayer(node);
 		
 //		System.out.println(getTreeDepth(node));
 		
@@ -60,43 +60,7 @@ public class BinaryTree {
      */
     public static void printTreeByLayer(TreeNode root) 
     {
-    	ArrayList<ArrayList<Integer>> relist=new ArrayList<>();
-    	ArrayList<Integer> tmp=new ArrayList<>();
-    	if(root==null){
-    		return;
-    	}
-    	LinkedList<TreeNode> q=new LinkedList<>();
-    	q.add(root);
-    	int now=1;
-    	int next=0;
-    	while(!q.isEmpty())
-    	{
-    		TreeNode node=q.remove();
-    		tmp.add(node.value);
-    		now--;
-    		
-    		if(node.left!=null){
-    			q.add(node.left);
-    			next++;
-    		}
-    		
-    		if(node.right!=null){
-    			q.add(node.right);
-    			next++;
-    		}
-    		
-    		//说明一层已经结束
-    		if(now==0){
-    			relist.add(new ArrayList<>(tmp));
-    			now=next;
-    			next=0;
-    			tmp.clear();
-    		}
-    	}
-    	
-    	for (ArrayList<Integer> list: relist) {
-			printList(list);
-		}
+
     }
     
     /**
@@ -105,13 +69,7 @@ public class BinaryTree {
      */
     public static int getTreeDepth(TreeNode root)
     {
-    	if(root==null){
-    		return 0;
-    	}
-    	
-    	int left=getTreeDepth(root.left);
-    	int right=getTreeDepth(root.right);
-    	return left>right?left+1:right+1;
+    	return 0;
     }
     
     /**
@@ -120,30 +78,7 @@ public class BinaryTree {
      */
     public static void printTreeTopToBottom(TreeNode root) 
     {
-    	ArrayList<Integer> list=new ArrayList<>();
-    	if(root==null){
-    		return;
-    	}
-    	
-    	ArrayList<TreeNode> q=new ArrayList<>();
-    	
-    	//q的存储顺序为：root,left,right,left_left,left_right,right_left,right_right....
-    	//上一层始终在下一层的前面。所以，一直将q的首位元素移除，可以得到打印顺序
-    	q.add(root);
-    	while(!q.isEmpty())
-    	{
-    		TreeNode node=q.remove(0);
-    		list.add(node.value);
-    		
-    		if(node.left!=null){
-    			q.add(node.left);
-    		}
-    		if(node.right!=null){
-    			q.add(node.right);
-    		}
-    	}
-    	
-    	printList(list);
+
     }
     
     //堆栈方式 前序遍历，中序遍历，后序遍历
@@ -153,21 +88,7 @@ public class BinaryTree {
 	 */
     public static void theFirstTraversal_Stack(TreeNode root)
 	{
-    	ArrayList<Integer> list=new ArrayList<>();
-		Stack<TreeNode> stack=new Stack<>();
-		while(root!=null||!stack.isEmpty())
-		{	
-			if(root!=null){
-				list.add(root.value);
-				stack.push(root);
-				root=root.getLeft();
-			}else{
-				root=stack.pop();
-				root=root.getRight();
-			}
-		}
-		
-		printList(list);
+
 	}
     
 	/**
@@ -176,21 +97,7 @@ public class BinaryTree {
 	 */
     public static void theInOrderTraversal_Stack(TreeNode root)
 	{
-    	ArrayList<Integer> list=new ArrayList<>();
-		Stack<TreeNode> stack=new Stack<>();
-		while(root!=null||!stack.isEmpty())
-		{			
-			if(root!=null){
-				stack.push(root);
-				root=root.getLeft();
-			}else{
-				root=stack.pop();
-				list.add(root.value);
-				root=root.getRight();
-			}
-		}
-		
-		printList(list);
+
 	}
     
     /**
@@ -198,28 +105,7 @@ public class BinaryTree {
      */
     public static void thePostOrderTraversal_Stack(TreeNode root)
     {
-    	ArrayList<Integer> list=new ArrayList<>();
-    	Stack<TreeNode> stack = new Stack<TreeNode>();  
-        Stack<TreeNode> output = new Stack<TreeNode>();	//构造一个中间栈来存储逆后序遍历的结果  
-        
-        while(root!=null||!stack.isEmpty())
-        {
-        	if(root!=null)
-        	{
-        		stack.push(root);
-        		output.push(root);
-        		root=root.getRight();
-        	}else{
-        		root=stack.pop();
-        		root=root.getLeft();
-        	}
-        }
-        
-        while(!output.isEmpty()){
-        	list.add(output.pop().value);
-        }
-        
-        printList(list);
+
     }
     
     
@@ -230,13 +116,7 @@ public class BinaryTree {
      */
     public static void theFirstTraversal(TreeNode root)
     {
-    	if(root==null){
-    		return;
-    	}
-    	
-    	printTreeNode(root);
-    	theFirstTraversal(root.left);
-    	theFirstTraversal(root.right);
+
     }
 	
     /**
@@ -245,13 +125,7 @@ public class BinaryTree {
      */
     public static void theInOrderTraversal(TreeNode root)
     {
-    	if(root==null){
-    		return;
-    	}
-    	
-    	theInOrderTraversal(root.left);
-    	printTreeNode(root);
-    	theInOrderTraversal(root.right);
+
     }
 
     /**
@@ -260,13 +134,7 @@ public class BinaryTree {
      */
     public static void thePostOrderTraversal(TreeNode root)
     {
-    	if(root==null){
-    		return;
-    	}
-    	
-    	thePostOrderTraversal(root.left);
-    	thePostOrderTraversal(root.right);
-    	printTreeNode(root);
+
     }
 
     
