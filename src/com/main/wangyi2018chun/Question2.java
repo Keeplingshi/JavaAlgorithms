@@ -16,19 +16,20 @@ public class Question2 {
 			count+=i;
 		}
 		
-		if(n%k<=k){
-			System.out.println(count);
-			return;
-		}
-		
-//		for(int y=k+1;y<=n-k;y++)
-//		{
-//			for(int x=y+k;x<=n;x++){
-//				if(x%y>=k){
-//					count++;
-//				}
-//			}
+//		if(n%k<=k){
+//			System.out.println(count);
+//			return;
 //		}
+		
+		for(int y=k+1;y<=n-k;y++)
+		{
+			for(int x=y+k;x<=n;x++){
+				if(x%y>=k){
+					System.out.println(x+" "+y);
+					count++;
+				}
+			}
+		}
 		
 		System.out.println(count);
 	}
@@ -36,6 +37,37 @@ public class Question2 {
 }
 
 /**
+
+7 2
+	5 3
+	6 4
+	7 4
+	7 5
+19
+
+8 2
+	5 3
+	6 4
+	7 4
+	7 5
+	8 3
+	8 5
+	8 6
+28
+
+9 2
+	5 3
+	6 4
+	7 4
+	7 5
+	8 3
+	8 5
+	8 6
+	9 5
+	9 6
+	9 7
+38
+
 
 5 2
 	2 3
