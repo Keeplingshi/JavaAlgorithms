@@ -54,7 +54,6 @@ public class KnapsackCopy {
 		int c=10;				//背包容量
 		int n=w.length;
 		
-
 	}
 	
 	/**
@@ -67,7 +66,6 @@ public class KnapsackCopy {
 		int c = 10; // 背包容量
 		int n=w.length;
 		
-
 	}
 	
 	public static void zero_one_Knapsack2()
