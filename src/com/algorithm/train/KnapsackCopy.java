@@ -54,6 +54,17 @@ public class KnapsackCopy {
 		int c=10;				//背包容量
 		int n=w.length;
 		
+		int dp[]=new int[c+1];
+		
+		for(int i=0;i<n;i++)
+		{
+			for(int j=w[i];j<=c;j++)
+			{
+				dp[j]=Math.max(dp[j], dp[j-w[i]]+v[i]);
+			}
+		}
+		
+		System.out.println(dp[c]);
 	}
 	
 	/**
@@ -66,6 +77,16 @@ public class KnapsackCopy {
 		int c = 10; // 背包容量
 		int n=w.length;
 		
+		int dp[]=new int[c+1];
+		for(int i=0;i<n;i++)
+		{
+			for(int j=c;j>=w[i];j--)
+			{
+				dp[j]=Math.max(dp[j], dp[j-w[i]]+v[i]);
+			}
+		}
+		
+		System.out.println(dp[c]);
 	}
 	
 	public static void zero_one_Knapsack2()

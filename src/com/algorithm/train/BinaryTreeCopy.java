@@ -22,12 +22,12 @@ public class BinaryTreeCopy {
 		TreeNode node=new BinaryTreeCopy().init();
 //		printTreeByLayer(node);
 		
-//		System.out.println(getTreeDepth(node));
+		System.out.println(getTreeDepth(node));
 		
 //		printTreeTopToBottom(node);
 		
 		theFirstTraversal_Stack(node);
-//		theInOrderTraversal_Stack(node);
+		theInOrderTraversal_Stack(node);
 //		thePostOrderTraversal_Stack(node);
 		
 //		theFirstTraversal(node);
@@ -93,15 +93,17 @@ public class BinaryTreeCopy {
     	
     	while(root!=null||!stack.isEmpty())
     	{
-    		if(root!=null){
+    		if(root!=null)
+    		{
     			list.add(root.value);
     			stack.push(root);
-    			root=root.getLeft();
+    			root=root.left;
     		}else{
     			root=stack.pop();
-    			root=root.getRight();
+    			root=root.right;
     		}
     	}
+    	
     	printList(list);
 	}
     
@@ -111,7 +113,21 @@ public class BinaryTreeCopy {
 	 */
     public static void theInOrderTraversal_Stack(TreeNode root)
 	{
-
+    	ArrayList<Integer> list=new ArrayList<>();
+    	Stack<TreeNode> stack=new Stack<>();
+    	
+    	while(root!=null||!stack.isEmpty())
+    	{
+    		if(root!=null){
+    			stack.push(root);
+    			root=root.left;
+    		}else{
+    			root=stack.pop();
+    			list.add(root.value);
+    			root=root.right;
+    		}
+    	}
+    	printList(list);
 	}
     
     /**
@@ -130,7 +146,12 @@ public class BinaryTreeCopy {
      */
     public static void theFirstTraversal(TreeNode root)
     {
-
+    	if(root==null){
+    		return;
+    	}
+    	printTreeNode(root);
+    	theFirstTraversal(root.left);
+    	theFirstTraversal(root.right);
     }
 	
     /**
