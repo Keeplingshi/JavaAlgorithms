@@ -19,31 +19,29 @@ public class SortCopy {
 //		countSort(array);
 	}
 	
-
 	/**
 	 * 快速排序
 	 * @param array
 	 */
-	private static void quickSort(int[] array) 
-	{
+	private static void quickSort(int[] array) {
 		quickSort(array,0,array.length-1);
 		printArr(array);
 	}
 
 	/**
-	 * 快速排序，哨兵相遇
+	 * 快速排序
 	 * @param array
-	 * @param start
-	 * @param end
+	 * @param i
+	 * @param j
 	 */
-	private static void quickSort(int[] array, int start, int end) 
-	{
+	private static void quickSort(int[] array, int start, int end) {
 		if(start>end){
 			return;
 		}
+		
 		int base=array[start];
-		int i=start;	//左指针
-		int j=end;		//右指针
+		int i=start;
+		int j=end;
 		
 		while(i!=j)
 		{
@@ -61,14 +59,13 @@ public class SortCopy {
 			}
 		}
 		
-		//此时，i==j，将array[i]与base交换
+		//i==j
 		array[start]=array[i];
 		array[i]=base;
 		
-		quickSort(array,start,i-1);
+		quickSort(array, start, i-1);
 		quickSort(array,i+1,end);
 	}
-
 
 	/**
 	 * 插入排序
