@@ -3,6 +3,13 @@ package com.main.xiecheng2018chun;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * 有一个NxN整数矩阵，请编写一个算法，将矩阵顺时针旋转90度。 
+
+	给定一个NxN的矩阵，和矩阵的阶数N,请返回旋转后的NxN矩阵,保证N小于等于300。
+ * @author Administrator
+ *
+ */
 public class Question2 {
 
 	public static void main(String[] args) {
