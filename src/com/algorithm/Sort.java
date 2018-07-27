@@ -21,7 +21,7 @@ public class Sort {
 	
 	/**
 	 * 归并排序
-	 * @param array
+	 * @param array 数组
 	 */
 	private static void mergeSort(int[] array) 
 	{
@@ -29,13 +29,13 @@ public class Sort {
 		printArr(array);
 	}
 
-	/**
-	 * 归并排序，递归过程
-	 * @param array
-	 * @param i
-	 * @param j
-	 */
-	private static void mergeSort(int[] array, int start, int end) 
+    /**
+     * 归并排序，递归过程
+     * @param array 数组
+     * @param start 起始位置
+     * @param end 结束位置
+     */
+	private static void mergeSort(int[] array, int start, int end)
 	{
 		
 		int mid=(start+end)/2;
@@ -49,10 +49,10 @@ public class Sort {
 	/**
 	 * 归并排序，将start到end之间的数组排序
 	 * 此时传入的array数组，start到mid是有序的，mid+1到end是有序的
-	 * @param array
-	 * @param start
-	 * @param mid
-	 * @param end
+	 * @param array 数组
+	 * @param start 起始
+	 * @param mid 中间
+	 * @param end 结束
 	 */
 	private static void mergeSort(int[] array, int start, int mid, int end) 
 	{
@@ -62,13 +62,13 @@ public class Sort {
 		int k=0;		//temp数组指针
 		
 		//将start到mid与mid+1到end之间的元素排序放入temp数组中
-		while(i<=mid&&j<=end){
-			if(array[i]<array[j]){
-				temp[k++]=array[i++];
-			}else{
-				temp[k++]=array[j++];
-			}
-		}
+        while (i <= mid && j <= end) {
+            if (array[i] < array[j]) {
+                temp[k++] = array[i++];
+            } else {
+                temp[k++] = array[j++];
+            }
+        }
 		
 		while(i<=mid){
 			temp[k++]=array[i++];
@@ -80,15 +80,16 @@ public class Sort {
 		
 		//此时得到的temp数组是有序的，且是array数组中start到end之间的所有元素
 		//将temp数组放回到array数组中
-		for(int t=0;t<temp.length;t++){
-			array[t+start]=temp[t];
-		}
+        System.arraycopy(temp,0,array,start,temp.length);
+//		for(int t=0;t<temp.length;t++){
+//			array[t+start]=temp[t];
+//		}
 		
 	}
 
 	/**
 	 * 快速排序
-	 * @param array
+	 * @param array 数组
 	 */
 	private static void quickSort(int[] array) {
 		quickSort(array,0,array.length-1);
@@ -96,20 +97,20 @@ public class Sort {
 	}
 
 	/**
-	 * 快速排序。排i到j
-	 * @param array
-	 * @param left
-	 * @param right
+	 * 快速排序。排start到end
+	 * @param array 数组
+	 * @param start 起始
+	 * @param end 结束
 	 */
 	private static void quickSort(int[] array, int start, int end) 
 	{
 		if(start>end){
 			return;
 		}
-		
-		int base=array[start];
-		int left=start;
-		int right=end;
+
+        int base = array[start];
+        int left = start;
+        int right = end;
 		
 		//哨兵相遇
 		while(right!=left){
@@ -139,39 +140,30 @@ public class Sort {
 		quickSort(array,left+1,end);
 		
 	}
-
-	/**
-	 * 希尔排序
-	 * @param array
-	 */
-	private static void shellSort(int[] array)
-	{
-		
-	}
 	
 	/**
 	 * 插入排序
 	 * 插入排序的基本操作就是将一个数据插入到已经排好序的有序数据中，
 	 * 从而得到一个新的、个数加一的有序数据，算法适用于少量数据的排序，时间复杂度为O(n^2)。
 	 * 算法时间复杂度O(n2)
-	 * @param array
+	 * @param array 数组
 	 */
-	private static void insertionSort(int[] array) 
-	{
-		for(int i=1;i<array.length;i++)
-		{
-			int tmp=array[i];
-			int j=i-1;
-			while(j>=0&&tmp<array[j])
-			{
-				array[j+1]=array[j];
-				j--;
-			}
-			array[j+1]=tmp;
-		}
-		
-		printArr(array);
-	}
+    private static void insertionSort(int[] array)
+    {
+        for (int i = 1; i < array.length; i++)
+        {
+            int tmp = array[i];
+            int j = i - 1;
+            while (j >= 0 && tmp < array[j])
+            {
+                array[j + 1] = array[j];
+                j--;
+            }
+            array[j + 1] = tmp;
+        }
+
+        printArr(array);
+    }
 
 	/**
 	 * 冒泡排序：
@@ -187,9 +179,9 @@ public class Sort {
 			{
 				if(array[j+1]<array[j])
 				{
-					int tmp=array[j+1];
-					array[j+1]=array[j];
-					array[j]=tmp;
+                    int tmp = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = tmp;
 				}
 			}
 		}
@@ -215,10 +207,10 @@ public class Sort {
 					minIndex=j;
 				}
 			}
-			
-			int tmp=array[i];
-			array[i]=array[minIndex];
-			array[minIndex]=tmp;
+
+            int tmp = array[i];
+            array[i] = array[minIndex];
+            array[minIndex] = tmp;
 		}
 		
 		printArr(array);
@@ -226,8 +218,8 @@ public class Sort {
 
 	/**
 	 * 计数排序
-	 * @param a
-	 * @return
+	 * @param array 数组
+	 * @return 数组
 	 */
     public static int[] countSort(int[] array){
         int b[] = new int[array.length];
@@ -261,9 +253,9 @@ public class Sort {
 	
 	/**
 	 * 打印数组
-	 * @param array
+	 * @param array 数组
 	 */
-	public static void printArr(int[] array)
+	private static void printArr(int[] array)
 	{
 		for (int i : array) {
 			System.out.print(i+" ");
