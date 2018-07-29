@@ -37,7 +37,6 @@ public class Sort {
      */
 	private static void mergeSort(int[] array, int start, int end)
 	{
-		
 		int mid=(start+end)/2;
 		if(start<end){
 			mergeSort(array,start,mid);
