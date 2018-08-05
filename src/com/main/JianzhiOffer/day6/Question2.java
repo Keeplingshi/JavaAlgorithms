@@ -15,20 +15,34 @@ public class Question2 {
 
 	public static void main(String[] args) {
 
-		int a=5;
-		int b=2;
-		int [][] matrix=new int[a][b];
+		int [][] matrix=new int[5][5];
 		int x=1;
-		for(int i=0;i<a;i++)
+		for(int i=0;i<5;i++)
 		{
-			for(int j=0;j<b;j++)
+			for(int j=0;j<5;j++)
 			{
 				matrix[i][j]=x;
 				x++;
 			}
 		}
 		
-		printMatrix2(matrix);
+		
+		printMatrix(matrix);
+		
+//		int a=5;
+//		int b=2;
+//		int [][] matrix=new int[a][b];
+//		int x=1;
+//		for(int i=0;i<a;i++)
+//		{
+//			for(int j=0;j<b;j++)
+//			{
+//				matrix[i][j]=x;
+//				x++;
+//			}
+//		}
+//		
+//		printMatrix2(matrix);
 		
 	}
 	
@@ -102,7 +116,7 @@ public class Question2 {
         
     }
     
-    public ArrayList<Integer> printMatrix(int [][] matrix) {
+    public static ArrayList<Integer> printMatrix(int [][] matrix) {
         
     	ArrayList<Integer> array=new ArrayList<>();
     	
