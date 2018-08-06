@@ -1,4 +1,4 @@
-package com.main.dynamic_programming;
+package com.algorithm.dynamic_programming;
 
 /**
  * 对于一个数字序列，请设计一个复杂度为O(nlogn)的算法，返回该序列的最长上升子序列的长度，
