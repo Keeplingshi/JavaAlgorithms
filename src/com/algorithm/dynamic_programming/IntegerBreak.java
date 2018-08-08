@@ -12,7 +12,7 @@ public class IntegerBreak {
 
     public static void main(String[] args)
     {
-        int n = 8;
+        int n = 10;
         System.out.println(integerBreak(n));
     }
 
@@ -22,7 +22,9 @@ public class IntegerBreak {
         array[1] = 1;
         for (int i = 2; i <= n; i++) {
             for (int j = 1; j <= i - j; j++) {
-                array[i] = Math.max(Math.max(Math.max(array[j], j) * array[i - j], j * (i - j)), array[i]);
+                int tmp = Math.max(array[j], j) * Math.max(array[i - j], i - j);
+                array[i] = Math.max(tmp, array[i]);
+//                array[i] = Math.max(Math.max(Math.max(array[j], j) * array[i - j], j * (i - j)), array[i]);
             }
         }
 
