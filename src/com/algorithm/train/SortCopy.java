@@ -27,38 +27,35 @@ public class SortCopy {
 
 	private static void mergeSort(int[] array, int start, int end)
 	{
-		int mid = (end - start) / 2;
-		if (start < mid) {
-			mergeSort(array, start, mid);
-			mergeSort(array, mid + 1, end);
-			mergeSort(array, start, mid, end);
-		}
+        int mid = (start + end) / 2;
+        if (start < end) {
+            mergeSort(array, start, mid);
+            mergeSort(array, mid + 1, end);
+            mergeSort(array, start, mid, end);
+        }
 	}
 
 	//array数组中，start到mid是有序的，mid+1到end是有序的
 	private static void mergeSort(int[] array, int start, int mid, int end)
 	{
-		int temp[] = new int[end - start + 1];
-		int i = start;
-		int j = mid + 1;
-		int k = 0;
-
-		while (i <= mid && j <= end) {
-			if (array[i] < array[j]) {
-				temp[k++] = array[i++];
-			} else {
-				temp[k++] = array[j++];
-			}
-		}
-
-		while (i <= mid) {
-			temp[k++] = array[i++];
-		}
-		while (j <= end) {
-			temp[k++] = array[j++];
-		}
-
-		System.arraycopy(temp, 0, array, start, temp.length);
+        int[] temp = new int[end - start + 1];
+        int i = start;
+        int j = mid + 1;
+        int k = 0;
+        while (i <= mid && j <= end) {
+            if (array[i] <= array[j]) {
+                temp[k++] = array[i++];
+            } else {
+                temp[k++] = array[j++];
+            }
+        }
+        while (i <= mid) {
+            temp[k++] = array[i++];
+        }
+        while (j <= end) {
+            temp[k++] = array[j++];
+        }
+        System.arraycopy(temp, 0, array, start, temp.length);
 	}
 
 	private static void quickSort(int[] array)
